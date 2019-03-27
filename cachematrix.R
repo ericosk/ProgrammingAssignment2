@@ -10,7 +10,7 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   
-  i <- NULL             ## stores the inverse of the matrix
+  i <- NULL             ## it stores the inverse of the matrix
   set <- function(y) {
     x <<- y             ## initialize the matrix with the value passed by user
     i <<- NULL          ## as x is newly created here, set it's inverse to NULL
@@ -21,8 +21,8 @@ makeCacheMatrix <- function(x = matrix()) {
   list(set = set, get = get,
        setinverse = setinverse,
        getinverse = getinverse)           ## when the funtion is call, it return this list
-                                          ## of 4 functions
-
+  ## of 4 functions
+  
 }
 
 
@@ -30,17 +30,17 @@ makeCacheMatrix <- function(x = matrix()) {
 ##                performs checks to see if it's need to re-run the inverse
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  ## Return a matrix that is the inverse of 'x'
   i <- x$getinverse() ## try to get the inverse of the matrix by call the special
-                      ## function getinverse of the object "x"
+  ## function getinverse of the object "x"
   if(!is.null(i)) {
     message("getting cached data")
     return(i)         ## i is not null, so inverse already created before, so return it
-                      ## and quit the function here (no need to proceed further)
+    ## and quit the function here (no need to proceed further)
   }
   data <- x$get()     ## if we are here, it's because the inverse was not found, so we
-                      ## need to get the matrix's data again and solve it's inverse for 
-                      ## futur calls
+  ## need to get the matrix's data again and solve it's inverse for 
+  ## futur calls
   inv <- solve(data, ...)   ## here we calculate the inverse
   x$setinverse(inv)         ## here we cache it in the "special matrix"
   inv                       ## finally we return the newly calculated inverse
